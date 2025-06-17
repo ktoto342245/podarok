@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Full-Screen Auto-Play Video</title>
+    <title>Fullscreen Video Embed</title>
     <style>
         * {
             margin: 0;
@@ -11,35 +11,26 @@
             box-sizing: border-box;
         }
 
-        body {
-            overflow: hidden; /* Убираем прокрутку */
+        body, html {
+            height: 100%;
+            overflow: hidden;
         }
 
-        #fullscreen-video {
-            width: 100vw; /* 100% ширины окна */
-            height: 100vh; /* 100% высоты окна */
-            object-fit: cover; /* Видео заполняет экран, сохраняя пропорции */
+        iframe {
+            width: 100vw;
+            height: 100vh;
+            border: none;
             position: fixed;
             top: 0;
             left: 0;
-            z-index: -1; /* Видео на заднем плане */
         }
     </style>
 </head>
 <body>
-    <video id="fullscreen-video" autoplay muted loop>
-        <source src="https://rt.pornhub.com/view_video.php?viewkey=65f45da7c3f03">
-        Your browser does not support the video tag.
-    </video>
-
-    <script>
-        // Автовоспроизведение видео
-        document.addEventListener('DOMContentLoaded', () => {
-            const video = document.getElementById('fullscreen-video');
-            video.play().catch(error => {
-                console.error('Autoplay failed:', error);
-            });
-        });
-    </script>
+    <iframe 
+        src="https://rt.pornhub.com/embed/65f45da7c3f03?autoplay=1" 
+        allowfullscreen
+        frameborder="0">
+    </iframe>
 </body>
 </html>
