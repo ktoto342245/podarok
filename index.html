@@ -37,12 +37,16 @@
         a:hover {
             text-decoration: underline;
         }
+        .warning {
+            color: #ff4444;
+            font-style: italic;
+        }
     </style>
 </head>
 <body>
-    <h2>Скачать видео с Pornhub</h2>
-    <input type="text" id="videoUrl" placeholder="Вставьте ссылку на видео (например, https://rt.pornhub.com/view_video.php?viewkey=...)">
-    <button onclick="generateDownloadLink()">Скачать</button>
+    <h2>Скачать видео бесплатно</h2>
+    <input type="text" id="videoUrl" placeholder="Вставьте ссылку на видео (например, https://rt.pornhub.com/view_video.php?...)">
+    <button onclick="generateDownloadLink()">Попробовать скачать</button>
     <div id="result"></div>
 
     <script>
@@ -51,9 +55,11 @@
             const resultDiv = document.getElementById('result');
 
             if (url) {
-                // Заменяем домен на saveporn.net для генерации ссылки
                 const downloadUrl = url.replace('rt.pornhub.com', 'www.saveporn.net');
-                resultDiv.innerHTML = `<p>Нажмите на ссылку для скачивания: <a href="${downloadUrl}" target="_blank">${downloadUrl}</a></p>`;
+                resultDiv.innerHTML = `
+                    <p>Попробуйте скачать по ссылке: <a href="${downloadUrl}" target="_blank">${downloadUrl}</a></p>
+                    <p class="warning">Внимание: Если видео требует премиум, бесплатный доступ может быть ограничен. Убедитесь, что вы соблюдаете правила сайта!</p>
+                `;
             } else {
                 resultDiv.innerHTML = '<p>Пожалуйста, вставьте ссылку на видео!</p>';
             }
