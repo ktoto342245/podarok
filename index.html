@@ -3,107 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Для самой прекрасной девушки</title>
+    <title>Для моей единственной 🌸</title>
     <style>
-        body {
+        * {
             margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             overflow: hidden;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Georgia', serif;
+            background: #1a1a2e;
+            position: relative;
+            perspective: 1000px;
+        }
+
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #2c2c54 0%, #1a1a2e 100%);
+            z-index: -2;
+        }
+
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .star {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: #fff;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.2; }
+            50% { opacity: 1; }
+            100% { opacity: 0.2; }
         }
 
         .container {
             text-align: center;
             color: #fff;
+            z-index: 5;
             position: relative;
-            z-index: 1;
+            min-height: 400px;
+            padding: 20px;
         }
 
         h1 {
-            font-size: 3em;
-            color: #ff6f91;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            animation: fadeIn 2s ease-in-out;
+            font-size: 4.5em;
+            color: #ff6b81;
+            text-shadow: 0 0 30px rgba(255, 107, 129, 0.8);
+            animation: glow 2s ease-in-out infinite alternate, fadeIn 2s ease-in;
+            transform-style: preserve-3d;
+            word-break: break-word;
         }
 
         p {
-            font-size: 1.5em;
-            color: #333;
-            margin: 20px 0;
-            animation: slideIn 3s ease-in-out;
-        }
-
-        .heart {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background: #ff4d4d;
-            transform: rotate(45deg);
-            animation: float 6s infinite;
-            opacity: 0.7;
-        }
-
-        .heart::before,
-        .heart::after {
-            content: '';
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background: #ff4d4d;
-            border-radius: 50%;
-        }
-
-        .heart::before {
-            top: -10px;
-            left: 0;
-        }
-
-        .heart::after {
-            top: 0;
-            left: -10px;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0) rotate(45deg); opacity: 0.7; }
-            50% { transform: translateY(-100vh) rotate(45deg); opacity: 0; }
-            100% { transform: translateY(-100vh) rotate(45deg); opacity: 0; }
+            font-size: 1.8em;
+            color: #e0e0e0;
+            margin: 20px auto;
+            max-width: 700px;
+            line-height: 1.5;
+            animation: slideIn 3s ease-in;
+            word-wrap: break-word;
         }
 
         @keyframes fadeIn {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
+            0% { opacity: 0; transform: translateZ(-200px); }
+            100% { opacity: 1; transform: translateZ(0); }
         }
 
         @keyframes slideIn {
-            0% { transform: translateY(50px); opacity: 0; }
+            0% { transform: translateY(100px); opacity: 0; }
             100% { transform: translateY(0); opacity: 1; }
         }
 
-        .button {
-            display: inline-block;
-            padding: 15px 30px;
+        @keyframes glow {
+            0% { text-shadow: 0 0 10px rgba(255, 107, 129, 0.5); }
+            100% { text-shadow: 0 0 40px rgba(255, 107, 129, 1); }
+        }
+
+        .envelope {
+            width: 300px;
+            height: 200px;
+            background: #fff;
+            margin: 30px auto;
+            position: relative;
+            cursor: pointer;
+            transform-style: preserve-3d;
+            transition: transform 1s;
+            overflow: hidden;
+        }
+
+        .envelope:hover {
+            transform: rotateX(10deg) rotateY(10deg) translateZ(50px);
+        }
+
+        .envelope::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+            clip-path: polygon(0 0, 50% 50%, 100% 0);
+            z-index: 1;
+            transition: transform 1s;
+        }
+
+        .envelope.open::before {
+            transform: rotateX(180deg);
+        }
+
+        .letter {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            background: #000000;
+            padding: 20px;
+            display: none;
+            text-align: left;
             font-size: 1.2em;
-            color: #fff;
-            background: #ff6f91;
-            border: none;
-            border-radius: 25px;
-            text-decoration: none;
-            margin-top: 20px;
-            transition: transform 0.3s, box-shadow 0.3s;
-            animation: fadeIn 4s ease-in-out;
+            color: #000000;
+            overflow-y: auto;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            max-height: 160px;
         }
 
-        .button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        .letter.show {
+            display: block;
+            animation: slideUp 1s ease-in;
         }
 
-        /* Анимация сердечек */
-        .hearts {
+        @keyframes slideUp {
+            0% { transform: translateY(100%); }
+            100% { transform: translateY(0); }
+        }
+
+        .petals {
             position: absolute;
             width: 100%;
             height: 100%;
@@ -111,38 +168,246 @@
             left: 0;
             z-index: 0;
         }
+
+        .petal {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: #ff6b81;
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            animation: fall 10s infinite linear;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-20vh) rotate(0deg); opacity: 0.8; }
+            100% { transform: translateY(120vh) rotate(360deg); opacity: 0; }
+        }
+
+        .surprise {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .surprise-content {
+            background: #000000;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 600px;
+            animation: popUp 0.5s ease-in;
+            position: relative;
+        }
+
+        @keyframes popUp {
+            0% { transform: scale(0); }
+            100% { transform: scale(1); }
+        }
+
+        .heart-animation {
+            width: 200px;
+            height: 200px;
+            position: relative;
+            margin: 20px auto;
+            animation: beat 1s infinite;
+        }
+
+        .heart-animation::before,
+        .heart-animation::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 100px;
+            height: 160px;
+            background: #ff4d4d;
+            border-radius: 50px 50px 0 0;
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+        }
+
+        .heart-animation::after {
+            left: 0;
+            transform: rotate(45deg);
+            transform-origin: 100% 100%;
+        }
+
+        @keyframes beat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .heart-effect {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 77, 77, 0.8);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 2em;
+            color: #333;
+            cursor: pointer;
+        }
+
+        .button {
+            padding: 15px 40px;
+            font-size: 1.5em;
+            color: #fff;
+            background: linear-gradient(45deg, #ff6b81, #ff8e53);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: transform 0.3s;
+            animation: pulse 2s infinite;
+        }
+
+        .button:hover {
+            transform: scale(1.1) translateZ(20px);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5em; }
+            p { font-size: 1.2em; max-width: 90%; }
+            .envelope { width: 200px; height: 150px; }
+            .letter { font-size: 1em; max-height: 120px; }
+            .button { font-size: 1.2em; padding: 10px 30px; }
+            .surprise-content { max-width: 90%; padding: 20px; }
+            .heart-animation { width: 150px; height: 150px; }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 2em; }
+            p { font-size: 1em; }
+            .envelope { width: 180px; height: 120px; }
+            .letter { font-size: 0.9em; max-height: 100px; }
+            .button { font-size: 1em; padding: 8px 20px; }
+            .surprise-content { max-width: 85%; padding: 15px; }
+            .heart-animation { width: 120px; height: 120px; }
+        }
     </style>
 </head>
 <body>
-    <div class="hearts" id="hearts"></div>
+    <div class="background"></div>
+    <div class="stars" id="stars"></div>
+    <div class="petals" id="petals"></div>
     <div class="container">
-        <h1>Для самой прекрасной девушки!</h1>
-        <p>Ты делаешь мой мир ярче каждый день. 💖</p>
-        <p>Этот маленький подарок — лишь частичка того, как сильно я тебя ценю.</p>
-        <a href="#" class="button" onclick="showSurprise()">Открыть сюрприз!</a>
+        <h1>Для моей единственной 🌸</h1>
+        <p>Ты — моё солнце, моя звезда, моё всё. Этот подарок — для тебя, моя любовь!</p>
+        <div class="envelope" id="envelope" onclick="openEnvelope()">
+            <div class="letter" id="letter">
+                <p>Дорогая моя,</p>
+                <p>Словами сложно передать, как сильно ты мне дорога. Каждый момент с тобой — как волшебство. Ты делаешь мою жизнь ярче, теплее и счастливее. Спасибо, что ты есть! 💖</p>
+                <p>С любовью, Котёнок:3</p>
+                <button class="button" onclick="showSurprise()">Открыть сюрприз! 🎁</button>
+            </div>
+        </div>
     </div>
 
+    <div class="surprise" id="surprise">
+        <span class="close-btn" onclick="closeSurprise()">✖</span>
+        <div class="surprise-content">
+            <p>Ты — моё счастье!</p>
+            <p>Это сердце бьётся для тебя. Спасибо, что делаешь мою жизнь такой невероятной!</p>
+            <div class="heart-animation" id="heartAnimation"></div>
+        </div>
+    </div>
+
+    <audio autoplay loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
     <script>
-        // Создание анимированных сердечек
-        function createHeart() {
-            const heart = document.createElement('div');
-            heart.classList.add('heart');
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = Math.random() * 2 + 3 + 's';
-            document.getElementById('hearts').appendChild(heart);
+        // Создание звёзд
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                star.style.left = Math.random() * 100 + 'vw';
+                star.style.top = Math.random() * 100 + 'vh';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
 
+        // Создание лепестков
+        function createPetals() {
+            const petalsContainer = document.getElementById('petals');
+            setInterval(() => {
+                const petal = document.createElement('div');
+                petal.classList.add('petal');
+                petal.style.left = Math.random() * 100 + 'vw';
+                petal.style.animationDuration = Math.random() * 5 + 5 + 's';
+                petalsContainer.appendChild(petal);
+                setTimeout(() => petal.remove(), 10000);
+            }, 500);
+        }
+
+        // Создание эффекта сердец вокруг основного
+        function createHeartEffects() {
+            const heart = document.getElementById('heartAnimation');
+            for (let i = 0; i < 10; i++) {
+                const effect = document.createElement('div');
+                effect.classList.add('heart-effect');
+                effect.style.left = Math.random() * 180 + 'px';
+                effect.style.top = Math.random() * 180 + 'px';
+                effect.style.animationDelay = Math.random() * 1 + 's';
+                heart.appendChild(effect);
+                setTimeout(() => effect.remove(), 2000);
+            }
+            setTimeout(createHeartEffects, 2000);
+        }
+
+        // Открытие конверта
+        function openEnvelope() {
+            const envelope = document.getElementById('envelope');
+            const letter = document.getElementById('letter');
+            envelope.classList.add('open');
             setTimeout(() => {
-                heart.remove();
-            }, 6000);
+                letter.classList.add('show');
+            }, 500);
         }
 
-        setInterval(createHeart, 300);
-
-        // Сюрприз по клику на кнопку
+        // Показать сюрприз
         function showSurprise() {
-            alert('Ты — моё счастье! Спасибо, что ты есть! 😊');
-            // Можно добавить дополнительный эффект, например, открыть новое окно или показать картинку
+            document.getElementById('surprise').style.display = 'flex';
+            createHeartEffects(); // Запуск эффекта сердец при открытии сюрприза
         }
+
+        // Закрыть сюрприз
+        function closeSurprise() {
+            document.getElementById('surprise').style.display = 'none';
+            const heart = document.getElementById('heartAnimation');
+            heart.innerHTML = ''; // Очистка эффектов при закрытии
+        }
+
+        // Инициализация при загрузке
+        window.onload = function() {
+            createStars();
+            createPetals();
+        };
     </script>
 </body>
 </html>
