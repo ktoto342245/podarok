@@ -1,60 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Duplicate Word</title>
+    <title>Video Downloader</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
             margin-top: 50px;
+            background-color: #f4f4f4;
         }
-        input, button {
-            padding: 5px;
+        input {
+            padding: 10px;
+            width: 300px;
             margin: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
         }
         #result {
             margin-top: 20px;
-            font-size: 18px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            display: inline-block;
-            word-wrap: break-word;
-            max-width: 80%;
+            font-size: 16px;
+        }
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <h2>Дублировать слово</h2>
-    <input type="text" id="wordInput" placeholder="Введите слово">
-    <input type="number" id="countInput" placeholder="Сколько раз" min="1">
-    <button onclick="duplicateWord()">Дублировать</button>
-    <button onclick="copyText()" id="copyButton" style="display: none;">Копировать</button>
+    <h2>Скачать видео с Pornhub</h2>
+    <input type="text" id="videoUrl" placeholder="Вставьте ссылку на видео (например, https://rt.pornhub.com/view_video.php?viewkey=...)">
+    <button onclick="generateDownloadLink()">Скачать</button>
     <div id="result"></div>
 
     <script>
-        function duplicateWord() {
-            const word = document.getElementById('wordInput').value;
-            const count = parseInt(document.getElementById('countInput').value);
+        function generateDownloadLink() {
+            const url = document.getElementById('videoUrl').value;
             const resultDiv = document.getElementById('result');
-            const copyButton = document.getElementById('copyButton');
 
-            if (word && count >= 1) {
-                const duplicated = word.repeat(count);
-                resultDiv.innerHTML = duplicated;
-                copyButton.style.display = 'inline-block'; // Показываем кнопку копирования
+            if (url) {
+                // Заменяем домен на saveporn.net для генерации ссылки
+                const downloadUrl = url.replace('rt.pornhub.com', 'www.saveporn.net');
+                resultDiv.innerHTML = `<p>Нажмите на ссылку для скачивания: <a href="${downloadUrl}" target="_blank">${downloadUrl}</a></p>`;
             } else {
-                resultDiv.innerHTML = "Пожалуйста, введите слово и число больше 0!";
-                copyButton.style.display = 'none'; // Скрываем кнопку, если ошибка
+                resultDiv.innerHTML = '<p>Пожалуйста, вставьте ссылку на видео!</p>';
             }
-        }
-
-        function copyText() {
-            const resultDiv = document.getElementById('result');
-            navigator.clipboard.writeText(resultDiv.innerHTML)
-                .then(() => alert('Текст скопирован в буфер обмена!'))
-                .catch(err => alert('Ошибка копирования: ' + err));
         }
     </script>
 </body>
