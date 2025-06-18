@@ -1,1 +1,45 @@
-.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duplicate Word</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        input, button {
+            padding: 5px;
+            margin: 5px;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Дублировать слово</h2>
+    <input type="text" id="wordInput" placeholder="Введите слово">
+    <input type="number" id="countInput" placeholder="Сколько раз" min="1">
+    <button onclick="duplicateWord()">Дублировать</button>
+    <div id="result"></div>
+
+    <script>
+        function duplicateWord() {
+            const word = document.getElementById('wordInput').value;
+            const count = parseInt(document.getElementById('countInput').value);
+            const resultDiv = document.getElementById('result');
+
+            if (word && count >= 1) {
+                const duplicated = word.repeat(count);
+                resultDiv.innerHTML = duplicated;
+            } else {
+                resultDiv.innerHTML = "Пожалуйста, введите слово и число больше 0!";
+            }
+        }
+    </script>
+</body>
+</html>
