@@ -3,13 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>...</title>
+    <title>Полноэкранное видео</title>
     <style>
         body, html {
             margin: 0;
             padding: 0;
             height: 100%;
             overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         video {
             width: 100%;
@@ -19,27 +22,53 @@
             top: 0;
             left: 0;
         }
+        #playButton {
+            position: fixed;
+            z-index: 10;
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: none; /* Скрыт по умолчанию */
+        }
     </style>
 </head>
 <body>
-    <video id="myVideo" autoplay muted>
+    <video id="myVideo" autoplay>
         <source src="https://ktoto342245.github.io/podarok/vidio.mp4" type="video/mp4">
         Ваш браузер не поддерживает воспроизведение видео.
     </video>
+    <button id="playButton">Воспроизвести со звуком</button>
 
     <script>
         const video = document.getElementById('myVideo');
-        // Устанавливаем время начала воспроизведения (например, 10 секунд)
+        const playButton = document.getElementById('playButton');
+
+        // Устанавливаем время начала воспроизведения (261 секунда = 4:21)
         video.currentTime = 0;
 
-        // Опционально: если хотите, чтобы видео зациклилось
+        // Включаем зацикливание
         video.loop = true;
 
-        // Опционально: если видео не запускается автоматически из-за политики браузера
+        // Пробуем автозапуск со звуком
         video.addEventListener('loadedmetadata', () => {
-            video.play().catch(error => {
+            video.play().then(() => {
+                // Если автозапуск удался, включаем звук
+                video.muted = false;
+            }).catch(error => {
+                // Если автозапуск заблокирован, показываем кнопку
                 console.log('Автозапуск заблокирован:', error);
+                playButton.style.display = 'block';
             });
+        });
+
+        // Обработчик для кнопки
+        playButton.addEventListener('click', () => {
+            video.muted = false; // Включаем звук
+            video.play(); // Запускаем видео
+            playButton.style.display = 'none'; // Скрываем кнопку
         });
     </script>
 </body>
